@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 
 private const val PAGE_MAX: Int = 5
 
 class MainActivity : AppCompatActivity(), SampleFragment.OnSampleFragmentActionListener {
+
+    private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +19,7 @@ class MainActivity : AppCompatActivity(), SampleFragment.OnSampleFragmentActionL
         //テストデータ作成
         val listItem = createTestData()
 
-        val viewPager = findViewById<ViewPager>(R.id.sample_view_pager)
+        viewPager = findViewById(R.id.sample_view_pager)
         val pagerAdapter = MainPagerAdapter(supportFragmentManager, listItem)
         viewPager.adapter = pagerAdapter
 
@@ -33,13 +36,11 @@ class MainActivity : AppCompatActivity(), SampleFragment.OnSampleFragmentActionL
 
     //FragmentのBACKボタンのイベント処理
     override fun onBackButtonClicked() {
-        val viewPager = findViewById<ViewPager>(R.id.sample_view_pager)
         viewPager.setCurrentItem(viewPager.currentItem - 1, true) //Pageを移動
     }
 
     //FragmentのNEXTボタンのイベント処理
     override fun onNextButtonClicked() {
-        val viewPager = findViewById<ViewPager>(R.id.sample_view_pager)
         viewPager.setCurrentItem(viewPager.currentItem + 1, true) //Pageを移動
     }
 
